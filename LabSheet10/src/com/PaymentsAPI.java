@@ -18,28 +18,23 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/PaymentsAPI")
 public class PaymentsAPI extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	
 	
 	Payment paymentObj = new Payment(); 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
+	
     public PaymentsAPI() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String output = paymentObj.insertPayment(request.getParameter("appCode"), 
@@ -53,12 +48,11 @@ public class PaymentsAPI extends HttpServlet {
 				response.getWriter().write(output); 
 	}
 
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
+	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Map paras = getParasMap(request); 
+		Map paras = getParasMap(request);
+		
 		 String output = paymentObj.updatePayment(paras.get("hidpaymentIDSave").toString(), 
 		 paras.get("appCode").toString(), 
 		 paras.get("cardType").toString(), 
@@ -71,13 +65,13 @@ public class PaymentsAPI extends HttpServlet {
 		response.getWriter().write(output);
 	}
 
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
+	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Map paras = getParasMap(request); 
-		 String output = paymentObj.deletePayment(paras.get("paymentID").toString()); 
+		 
+		String output = paymentObj.deletePayment(paras.get("paymentID").toString()); 
+		
 		response.getWriter().write(output); 
 	}
 	

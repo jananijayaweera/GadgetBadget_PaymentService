@@ -59,11 +59,14 @@ public class Payment {
 			preparedStmt.execute();
 			con.close();
 		
-			output = "Inserted successfully";
+			String newPayments = readPayment(); 
+			 output = "{\"status\":\"success\", \"data\": \"" + 
+			 newPayments + "\"}";
+			 
 			}
 			catch (Exception e) {
-				output = "Error while inserting the card details.";
-				System.err.println(e.getMessage());
+				output = "{\"status\":\"error\", \"data\": \"Error while inserting the payment.\"}"; 
+						 System.err.println(e.getMessage());
 			}
 			return output;
 
@@ -83,7 +86,11 @@ public class Payment {
 			} 
 				
 			// Prepare the html table to be displayed
-				output = "<table border=\"1\"><tr><th>Payment ID</th> <th>App Code</th> <th>CardType</th> <th>Name</th> <th>CardNo</th> <th>Phone</th ><th>Exp_date</th> <th>Amount</th> </tr>";
+				output = "<table border=\"1\">"
+						+ "<tr><th>Payment ID</th> <th>App Code</th> <th>Card Type</th>"
+						+ " <th>Name</th> <th>CardNo</th> <th>Phone</th >"
+						+ "<th>Expiry Date</th> <th>Amount</th> </tr>";
+				
 				String query = "SELECT * FROM `payment`";
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(query);
@@ -100,8 +107,10 @@ public class Payment {
 					String amount = Double.toString(rs.getDouble("amount"));
 					
 			// Add into the html table
-					output = "<tr><td><input id='hidpaymentIDUpdate' name='hidpaymentIDUpdate' type='hidden' value=' " + paymentID + " '>" 
-								+ appCode + "</td>";
+					output = "<tr><td><input id='hidpaymentIDUpdate' "
+							+ "name='hidpaymentIDUpdate' type='hidden' value=' " + paymentID
+							+ " '>" 
+							+ appCode + "</td>";
 					output += "<td>" + cardType + "</td>";
 					output += "<td>" + nameOnCard + "</td>";
 					output += "<td>" + cardNo + "</td>";
@@ -110,14 +119,14 @@ public class Payment {
 					output += "<td>" + amount + "</td>";
 					
 					//buttons
-					output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn=secondary'></td>"
-							+ "<td><form method='post' action='PaymentService.jsp'>"
-							+ "<input name='btnRemove' "
-							+ "type='submit' value='Remove' class='btn btn-danger'>"
-							+ "<input name='hidpaymentIDDelete' type='hidden' value=' " + paymentID + " '>" + "</form></td></tr>";
+					output += "<td><input name='btnUpdate' type='button' value='Update' "
+							+ "class='btnUpdate btn btn-secondary' data-paymentid='" + paymentID + "'></td>"
+							+ "<td><input name='btnRemove' type='button' value='Remove' "
+							+ "class='btnRemove btn btn-danger' data-paymentid='" + paymentID + "'></td>"; 
 					
 				}
 					con.close();
+					
 			// Complete the html table
 			output += "</table>";
 			} 
@@ -161,13 +170,15 @@ public class Payment {
 			preparedStmt.execute();
 			con.close();
 			
-			output = "Updated successfully ";
+			String newPayments = readPayment(); 
+			 output = "{\"status\":\"success\", \"data\": \"" + 
+			 newPayments + "\"}";
 			
 		}
 		catch (Exception e)
 		{
-			output = "Error while updating the item.";
-			System.err.println(e.getMessage());
+			output = "{\"status\":\"error\", \"data\": \"Error while updating the payment.\"}"; 
+					 System.err.println(e.getMessage()); 
 		}
 		
 		return output;
@@ -182,8 +193,9 @@ public class Payment {
 				try 
 				{
 					Connection con = connect();
-					if(con == null) {
-						return"Error while connecting to the databae for deleting.";
+					if(con == null)
+					{
+						return "Error while connecting to the databae for deleting.";
 					}
 					
 					//Create a prepared statement
@@ -198,12 +210,14 @@ public class Payment {
 					preparedStmt.execute();
 					con.close();
 					
-					output = "Delete Successfully";	
+					String newPayments = readPayment(); 
+					 output = "{\"status\":\"success\", \"data\": \"" + 
+					 newPayments + "\"}";
 				}
 				catch (Exception e)
 				{
-					output = "Error while deleting the item.";
-					System.err.println(e.getMessage());
+					output = "{\"status\":\"error\", \"data\": \"Error while deleting the payment.\"}"; 
+							 System.err.println(e.getMessage()); 
 				}
 			
 				return output;
