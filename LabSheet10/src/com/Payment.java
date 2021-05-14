@@ -42,7 +42,7 @@ public class Payment {
 			}
 		
 			// create a prepared statement
-			String query = " INSERT INTO `payment`(`paymentID`, `appCode`, `cardType`, `nameOnCard`, `cardNo`, `phone`, `expdate`, `amount`)" + " values (?,?, ?, ?, ?, ?, ?, ?)";
+			String query = " INSERT INTO payment(`paymentID`, `appCode`, `cardType`, `nameOnCard`, `cardNo`, `phone`, `expdate`, `amount`)" + " values (?,?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 		
 			// binding values
@@ -88,10 +88,10 @@ public class Payment {
 			// Prepare the html table to be displayed
 				output = "<table border=\"1\">"
 						+ "<tr><th>Payment ID</th> <th>App Code</th> <th>Card Type</th>"
-						+ " <th>Name</th> <th>CardNo</th> <th>Phone</th >"
-						+ "<th>Expiry Date</th> <th>Amount</th> </tr>";
+						+ " <th>Name</th> <th>Card No</th> <th>Phone</th >"
+						+ "<th>Expiry Date</th> <th>Amount</th><th>Update</th><th>Remove</th></tr>";
 				
-				String query = "SELECT * FROM `payment`";
+				String query = "SELECT * FROM payment";
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				
@@ -108,9 +108,8 @@ public class Payment {
 					
 			// Add into the html table
 					output = "<tr><td><input id='hidpaymentIDUpdate' "
-							+ "name='hidpaymentIDUpdate' type='hidden' value=' " + paymentID
-							+ " '>" 
-							+ appCode + "</td>";
+							+ "name='hidpaymentIDUpdate' type='hidden' value='" + paymentID
+							+ "'>" + appCode + "</td>";
 					output += "<td>" + cardType + "</td>";
 					output += "<td>" + nameOnCard + "</td>";
 					output += "<td>" + cardNo + "</td>";
@@ -122,7 +121,7 @@ public class Payment {
 					output += "<td><input name='btnUpdate' type='button' value='Update' "
 							+ "class='btnUpdate btn btn-secondary' data-paymentid='" + paymentID + "'></td>"
 							+ "<td><input name='btnRemove' type='button' value='Remove' "
-							+ "class='btnRemove btn btn-danger' data-paymentid='" + paymentID + "'></td>"; 
+							+ "class='btnRemove btn btn-danger' data-paymentid='" + paymentID + "'>" + "</td></tr>"; 
 					
 				}
 					con.close();
@@ -152,7 +151,7 @@ public class Payment {
 			}
 			
 			// create a prepared statement
-			String query = "UPDATE `payment` SET `paymentID`=?,`appCode`=?,`cardType`=?,`nameOnCard`=?,`cardNo`=?,`phone`=?,`expdate`=?,`amount`=? WHERE paymentID=?";
+			String query = "UPDATE payment SET `paymentID`=?,`appCode`=?,`cardType`=?,`nameOnCard`=?,`cardNo`=?,`phone`=?,`expdate`=?,`amount`=? WHERE paymentID=?";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
@@ -199,7 +198,7 @@ public class Payment {
 					}
 					
 					//Create a prepared statement
-					String query = "delete from items where paymentID=?";
+					String query = "delete from payment where paymentID=?";
 					
 					PreparedStatement preparedStmt = con.prepareStatement(query);
 					

@@ -11,34 +11,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import com.sun.java_cup.internal.runtime.Scanner;
 
-/**
- * Servlet implementation class PaymentsAPI
- */
 @WebServlet("/PaymentsAPI")
 public class PaymentsAPI extends HttpServlet {
 	
-	
 	Payment paymentObj = new Payment(); 
+	
+	private static final long serialVersionUID = 1L;
+	
     
 	
-    public PaymentsAPI() {
-        super();
+    //public PaymentsAPI() {
+        //super();
         
-    }
+    //}
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String output = paymentObj.insertPayment(request.getParameter("appCode"), 
-				 request.getParameter("cardType"), 
+				request.getParameter("cardType"), 
 				request.getParameter("nameOnCard"), 
 				request.getParameter("cardNo"),
 				request.getParameter("phone"),
@@ -57,7 +56,7 @@ public class PaymentsAPI extends HttpServlet {
 		 paras.get("appCode").toString(), 
 		 paras.get("cardType").toString(), 
 		 paras.get("nameOnCard").toString(), 
-		 paras.get("cardno").toString(),
+		 paras.get("cardNo").toString(),
 		 paras.get("phone").toString(),
 		 paras.get("expdate").toString(),
 		 paras.get("amount").toString()); 

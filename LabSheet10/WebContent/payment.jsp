@@ -19,14 +19,16 @@
 							
 								<h1>Payment Management</h1>
 								<form id="formPayment" name="formPayment" method="post" action="payment.jsp">
-			 						App Code: <input name="appCode" type="text" type="text" class="form-control form-control-sm" ><br>
-			 						Card Type: <input name="cardType" type="text" type="text" class="form-control form-control-sm"><br>
- 			 						Name On Card: <input name="nameOnCard" type="text" type="text" class="form-control form-control-sm"><br>
- 			 						Card No: <input name="cardNo" type="text" type="text" class="form-control form-control-sm"><br>
-			 						Phone: <input name="phone" type="text" type="text" class="form-control form-control-sm"><br>
- 			 						Expiry Date: <input name="expdate" type="text" type="text" class="form-control form-control-sm" ><br>
- 								 	Amount: <input name="amount" type="text" type="text" class="form-control form-control-sm"><br>
+			 						App Code: <input name="appCode" id="appCode" type="text" class="form-control form-control-sm" ><br>
+			 						Card Type: <input name="cardType" id="cardType" type="text" class="form-control form-control-sm"><br>
+ 			 						Name On Card: <input name="nameOnCard" id="nameOnCard" type="text"  class="form-control form-control-sm"><br>
+ 			 						Card No: <input name="cardNo" id="cardNo" type="text" class="form-control form-control-sm"><br>
+			 						Phone: <input name="phone" id="phone" type="text" class="form-control form-control-sm"><br>
+ 			 						Expiry Date: <input name="expdate" id="expdate" type="text" class="form-control form-control-sm" ><br>
+ 								 	Amount: <input name="amount" id="amount" type="text" class="form-control form-control-sm"><br>
  									<br>
+ 									<div id="alertSuccess" class="alert alert-success"></div>
+									<div id="alertError" class="alert alert-danger"></div>
  									<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary">
  									<input type="hidden" id="hidpaymentIDSave" name="hidpaymentIDSave" value="">
 								</form>
